@@ -1,0 +1,11 @@
+$(function(){
+    $(".btn").click(function(){
+      $("#informasi").slideDown();
+    });
+    $(".btn").click(function(){
+        $("#detail").slideDown();
+      });
+    $(".btn").click(function(){
+        $("#riwayat").slideDown();
+      });
+});

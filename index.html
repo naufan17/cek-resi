@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Resi</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="relative bg-slate-900">
+        <div class="absolute inset-x-0 bottom-0">
+            <svg viewBox="0 0 224 12" fill="currentColor" class="w-full -mb-1 text-white" preserveAspectRatio="none">
+            <path d="M0,0 C48.8902582,6.27314026 86.2235915,9.40971039 112,9.40971039 C137.776408,9.40971039 175.109742,6.27314026 224,0 L224,12.0441132 L0,12.0441132 L0,0 Z"></path>
+            </svg>
+        </div>
+        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-24">
+            <div class="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-3xl sm:text-center">
+                <h2 class="mb-6 text-5xl font-bold text-white sm:text-6xl sm:leading-none">Cek Resi</h2>
+                <p class="mb-6 text-base font-thin text-gray-300 md:text-lg">Lacak Barang Pengirimanmu via JNE, JNT, SiCepat, Shopee Express dll</p>
+                <div class="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
+                    <input type="text" id="receipt" placeholder="Masukkan resi" required class="flex-grow w-full h-12 px-4 mb-3 text-white bg-transparent border-2 border-slate-800 rounded appearance-none md:mr-2 md:mb-0 focus:border-slate-600 focus:outline-none focus:shadow-outline"/>
+                    <select id="courier" class="inline-flex w-full h-12 px-2 mb-3 font-medium text-white transition rounded shadow-md md:w-auto bg-slate-800 hover:bg-slate-600 md:mr-2 md:mb-0 focus:shadow-outline focus:outline-none">
+                        <option value="jne">JNE</option>
+                        <option value="pos">POS Indonesia</option>
+                        <option value="jnt">JNT</option>
+                        <option value="sicepat">SiCepat</option>
+                        <option value="tiki">Tiki</option>
+                        <option value="anteraja">AnterAja</option>
+                        <option value="wahana">Wahana</option>
+                        <option value="ninja">Ninja</option>
+                        <option value="lion">Lion</option>
+                        <option value="pcp">PCP Express</option>
+                        <option value="jet">JET Express</option>
+                        <option value="rex">REX Express</option>
+                        <option value="first">First Logistics</option>
+                        <option value="ide">ID Express</option>
+                        <option value="spx">Shopee Express</option>
+                    </select>
+                    <button onclick="tracking()" class="btn inline-flex items-center justify-center w-full h-12 px-6 font-medium text-white transition rounded shadow-md md:w-auto bg-slate-800 hover:bg-slate-600 focus:shadow-outline focus:outline-none">Cek</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:p-10 hidden informasi" id="informasi">
+        <!-- <div class="grid row-gap-8 lg:grid-cols-6">
+            <div class="grid lg:col-span-3">
+                <div>
+                    <p class="mb-10 text-2xl font-bold">Informasi</p>
+                </div>
+            </div>
+            <div class="grid border divide-y rounded-lg lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+                <div class="flex flex-col justify-between p-8">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">No resi</p>
+                        <p class="text-deep-purple-accent-400" id="resi"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Kurir</p>
+                        <p class="text-deep-purple-accent-400" id="kurir"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">layanan</p>
+                        <p class="text-deep-purple-accent-400" id="layanan"></p>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-8">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Status</p>
+                        <p class="text-deep-purple-accent-400" id="status"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Tanggal</p>
+                        <p class="text-deep-purple-accent-400" id="tanggal"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Berat</p>
+                        <p class="text-deep-purple-accent-400" id="berat"></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:p-10 hidden detail" id="detail">
+        <!-- <div class="grid row-gap-8 lg:grid-cols-6">
+            <div class="grid lg:col-span-3">
+                <div>
+                    <p class="mb-10 text-2xl font-bold">Detail</p>
+                </div>
+            </div>
+            <div class="grid border divide-y rounded-lg lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+                <div class="flex flex-col justify-between p-8">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Asal</p>
+                        <p class="text-deep-purple-accent-400" id="asal"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Tujuan</p>
+                        <p class="text-deep-purple-accent-400" id="tujuan"></p>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-between p-8">
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Pengirim</p>
+                        <p class="text-deep-purple-accent-400" id="pengirim"></p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800 sm:text-base">Penerima</p>
+                        <p class="text-deep-purple-accent-400" id="penerima"></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="riwayat px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:p-10 hidden riwayat" id="riwayat">
+        <!-- <div class="grid row-gap-8 lg:grid-cols-2 ">
+            <div class="grid lg:col-span-1">
+                <div>
+                    <p class="mb-10 text-2xl font-bold">Riwayat</p>
+                </div>
+            </div>
+            <div>
+                <div class="flex">
+                    <div class="flex flex-col items-center mr-4 ">
+                        <div>
+                            <div class="flex items-center justify-center w-10 h-10 border rounded-full">
+                                <svg class="w-4 text-gray-600" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <line fill="none" stroke-miterlimit="10" x1="12" y1="2" x2="12" y2="22"></line>
+                                <polyline fill="none" stroke-miterlimit="10" points="19,15 12,22 5,15"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="w-px h-full bg-gray-300">
+                        </div>
+                    </div>
+                    <div class="pt-1 pb-8">
+                        <p class="mb-2 font-bold"></p>
+                        <p class="text-gray-700"></p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>
