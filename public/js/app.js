@@ -15,13 +15,13 @@ async function tracking(){
 
     if(json.status == 200){
         let informasiHTML = `
-        <div class="grid row-gap-8 lg:grid-cols-6">
-            <div class="grid lg:col-span-3">
+        <div class="grid row-gap-8 lg:grid-cols-4">
+            <div class="grid lg:col-span-2">
                 <div>
                     <p class="mb-10 sm:text-2xl text-xl font-bold">Informasi</p>
                 </div>
             </div>
-            <div class="grid border divide-y rounded-lg lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+            <div class="grid border divide-y rounded-lg lg:col-span-2 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
                 <div class="flex flex-col justify-between sm:p-8 p-6">
                     <div>
                         <p class="text-base font-semibold text-gray-800 sm:text-lg">No resi</p>
@@ -54,13 +54,13 @@ async function tracking(){
         </div>`;
 
         let detailHTML = `
-        <div class="grid row-gap-8 lg:grid-cols-6">
-            <div class="grid lg:col-span-3">
+        <div class="grid row-gap-8 lg:grid-cols-4">
+            <div class="grid lg:col-span-2">
                 <div>
                     <p class="mb-10 sm:text-2xl text-xl font-bold">Detail</p>
                 </div>
             </div>
-            <div class="grid border divide-y rounded-lg lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+            <div class="grid border divide-y rounded-lg lg:col-span-2 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
                 <div class="flex flex-col justify-between sm:p-8 p-6">
                     <div>
                         <p class="text-base font-semibold text-gray-800 sm:text-lg">Asal</p>
@@ -146,13 +146,13 @@ async function tracking(){
 
     }else{
         let informasiHTML = `
-        <div class="grid row-gap-8 lg:grid-cols-6">
-            <div class="grid lg:col-span-3">
+        <div class="grid row-gap-8 lg:grid-cols-4">
+            <div class="grid lg:col-span-2">
                 <div>
                     <p class="mb-10 text-2xl font-bold">Informasi</p>
                 </div>
             </div>
-            <div class="grid border divide-y rounded-lg lg:col-span-3 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
+            <div class="grid border divide-y rounded-lg lg:col-span-2 sm:grid-cols-2 sm:divide-y-0 sm:divide-x">
                 <div class="flex flex-col justify-between sm:p-8 p-6">
                     <div>
                         <p class="text-base font-semibold text-gray-800 sm:text-lg">No resi</p>
