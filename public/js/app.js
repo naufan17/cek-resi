@@ -93,7 +93,7 @@ async function tracking(){
                                 </div>
                                 <div>`;
 
-        for(i = json.data.history.length-1; i >= 0; i--){        
+        for(i = json.data.history.length-1; i >= 1; i--){        
             segmentHTML = `     <div class="flex">
                                     <div class="flex flex-col items-center mr-4 ">
                                         <div>
@@ -107,7 +107,7 @@ async function tracking(){
                                         <div class="w-px h-full bg-gray-300">
                                         </div>
                                     </div>
-                                    <div class="pt-1 sm:p-8 p-6">
+                                    <div class="pt-1 sm:pt-1 p-6 sm:p-8">
                                         <p class="mb-2 text-base sm:text-lg font-bold">${json.data.history[i].desc}</p>
                                         <p class="text-gray-700 sm:text-base text-sm">${json.data.history[i].date}</p>
                                     </div>
@@ -115,6 +115,27 @@ async function tracking(){
 
             riwayatHTML += segmentHTML;
         }
+
+        for(i = 0; i >= 0; i--){        
+            segmentHTML = `     <div class="flex">
+                                    <div class="flex flex-col items-center mr-4 ">
+                                        <div>
+                                            <div class="flex items-center justify-center w-10 h-10 border rounded-full">
+                                                <svg class="w-6 text-gray-600" stroke="currentColor" viewBox="0 0 24 24">
+                                                <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="6,12 10,16 18,8"></polyline>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pt-1 sm:pt-1 p-6 sm:p-8">
+                                        <p class="mb-2 text-base sm:text-lg font-bold">${json.data.history[i].desc}</p>
+                                        <p class="text-gray-700 sm:text-base text-sm">${json.data.history[i].date}</p>
+                                    </div>
+                                </div>`;
+
+            riwayatHTML += segmentHTML;
+        }
+
 
         riwayatHTML += `    </div>
                         </div>`;
