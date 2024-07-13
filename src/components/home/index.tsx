@@ -5,6 +5,7 @@ import { useState } from "react";
 import Input from '@/components/common/input';
 import Option from '@/components/common/option';
 import Button from '@/components/common/button';
+import Error from '@/components/common/error';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
   const [information, setInformation] = useState<SummaryData | null>(null);
   const [detail, setDetail] = useState<DetailData | null>(null);
   const [history, setHistory] = useState<HistoryData[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     listCourier();
@@ -27,14 +29,18 @@ const Home: React.FC = () => {
 
   const listCourier = async () => {
     const result = await requestGetListCourier();
-    setList(result)
+    setList(result)  
   };
 
   const trackReceipt = async () => {
-    const result = await requestGetTrack(courier, receipt);
-    setInformation(result.summary);
-    setDetail(result.detail);
-    setHistory(result.history);
+    try {
+      const result = await requestGetTrack(courier, receipt);
+      setInformation(result.summary);
+      setDetail(result.detail);
+      setHistory(result.history);  
+    } catch (err) {
+      setError('Failed to fetch track receipt')
+    }
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -71,11 +77,12 @@ const Home: React.FC = () => {
             <div className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
               <Input receipt={receipt} handleInputChange={handleInputChange} placeholder={'Masukkan Resi'} />
               <Option option={list} courier={courier} handleInputChange={handleInputChange} />
-              <Button trackReceipt={trackReceipt} title={'Cek'} />
+              <Button onSubmit={trackReceipt} title={'Cek'} />
             </div>
           </div>
         </div>
       </div>
+      {error && <Error title={error}/>}
       {information && <Information information={information} />}
       {detail && <Detail detail={detail} />}
       {history && <History history={history} />}

@@ -1,11 +1,15 @@
 import { Metadata } from 'next'
 import '../styles/globals.css'
 
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
 export const metadata: Metadata = {
   title: 'Cek Resi',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
       <body>
@@ -16,3 +20,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+
+export default RootLayout;
