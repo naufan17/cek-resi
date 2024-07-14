@@ -2,18 +2,18 @@ import axios from '../config/axios';
 import { TrackData } from '@/interfaces/track';
 
 export const requestGetTrack = async (courier: string, receipt:string): Promise<TrackData> => {
-  // try {
-  //   const result = await axios.get('/track', {
-  //     params: {
-  //       api_key: '174f7c4199d633fb2436acbf5e2576bc505aba36a11fa4bf1f6116e77c0c7c70' || process.env.API_KEY,
-  //       courier,
-  //       awb: receipt
-  //     }
-  //   })
-  //   return result.data.data;
-  // } catch (err) {
-  //   throw new Error('Failed to fetch track receipt');
-  // } 
+  try {
+    const result = await axios.get('/track', {
+      params: {
+        api_key: '174f7c4199d633fb2436acbf5e2576bc505aba36a11fa4bf1f6116e77c0c7c70' || process.env.API_KEY,
+        courier,
+        awb: receipt
+      }
+    })
+    return result.data.data;
+  } catch (err) {
+    throw new Error('Failed to fetch track receipt');
+  } 
 
   // const data = {
   //   "status": 200,
@@ -80,5 +80,5 @@ export const requestGetTrack = async (courier: string, receipt:string): Promise<
   //   }
   // }
 
-  return data.data;
+  // return data.data;
 }

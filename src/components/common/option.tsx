@@ -13,7 +13,7 @@ const Option: React.FC<OptionProps> = ({ courier, handleInputChange, option }) =
       name="courier"
       value={courier}
       onChange={handleInputChange}
-      className="inline-flex w-full sm:h-12 h-10 px-2 mb-3 sm:text-base text-md text-white transition rounded shadow-md md:w-auto bg-slate-800 hover:bg-slate-600 md:mr-2 md:mb-0 focus:shadow-outline focus:outline-none"
+      className="flex-grow w-full sm:h-12 h-10 px-4 sm:text-base text-md text-white transition rounded shadow-md bg-slate-800 hover:bg-slate-600 focus:shadow-outline focus:outline-none"
     >
       <option value="" disabled hidden>Pilih Kurir</option>
         {option.map((opt, index) => 

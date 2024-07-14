@@ -5,7 +5,7 @@ import { useState } from "react";
 import Input from '@/components/common/input';
 import Option from '@/components/common/option';
 import Button from '@/components/common/button';
-import Error from '@/components/common/error';
+import Alert from '@/components/common/alert';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
@@ -21,7 +21,8 @@ const Home: React.FC = () => {
   const [information, setInformation] = useState<SummaryData | null>(null);
   const [detail, setDetail] = useState<DetailData | null>(null);
   const [history, setHistory] = useState<HistoryData[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [alert, setAlert] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
 
   useEffect(() => {
     listCourier();
@@ -39,12 +40,29 @@ const Home: React.FC = () => {
       setDetail(result.detail);
       setHistory(result.history);  
     } catch (err) {
-      setError('Failed to fetch track receipt')
+      setAlert(true)
     }
   };
 
+  const validateFields = () => {
+    const newErrors: {[key: string]: string} = {};
+    if (!receipt) newErrors.receipt = "*Resi kosong*";
+    if (!courier) newErrors.courier = "*Kurir kosong*";
+    return newErrors;
+  }
+
+  const handleChekTracking = () => {
+    const validateErrors = validateFields();
+    if (Object.keys(validateErrors).length > 0) {
+      setErrors(validateErrors);
+      return;
+    }
+    setErrors({});
+    trackReceipt();
+  }
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     switch (name) {
       case 'courier':
@@ -67,22 +85,36 @@ const Home: React.FC = () => {
           </svg>
         </div>
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-24">
-          <div className="relative max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-3xl sm:text-center">
+          <div className="max-w-2xl sm:mx-auto sm:max-w-xl md:max-w-3xl sm:text-center">
             <h2 className="mb-6 text-3xl font-bold text-white sm:text-5xl sm:leading-none">
               Cek Resi
             </h2>
             <p className="mb-6 text-sm font-thin text-gray-300 sm:text-lg">
               Lacak Barang Pengirimanmu via JNE, JNT, SiCepat, Shopee Express dll
             </p>
-            <div className="flex flex-col items-center w-full mb-4 md:flex-row md:px-16">
-              <Input receipt={receipt} handleInputChange={handleInputChange} placeholder={'Masukkan Resi'} />
-              <Option option={list} courier={courier} handleInputChange={handleInputChange} />
-              <Button onSubmit={trackReceipt} title={'Cek'} />
+            <div className="grid grid-cols-1 sm:grid-cols-8 mb-6 justify-between sm:space-x-2">
+              <div className="inline-block sm:col-span-5">
+                <Input receipt={receipt} handleInputChange={handleInputChange} placeholder={'Masukkan Resi'} />
+                {errors.receipt && <p className="mt-1 text-red-500 text-sm sm:text-base">{errors.receipt}</p>}
+              </div>
+              <div className="inline-block mt-2 sm:mt-0 sm:col-span-2">
+                <Option option={list} courier={courier} handleInputChange={handleInputChange} />
+                {errors.courier && <p className="mt-1 text-red-500 text-sm sm:text-base">{errors.courier}</p>}
+              </div>
+              <div className="inline-block mt-2 sm:mt-0 sm:col-span-1">
+                <Button onClick={handleChekTracking} title={'Cek'}/>
+              </div>
             </div>
+            {alert && 
+              <Alert 
+                status={false} 
+                message={"Resi tidak ditemukan"} 
+                onClose={() => setAlert(false)}
+              />
+            }
           </div>
         </div>
       </div>
-      {error && <Error title={error}/>}
       {information && <Information information={information} />}
       {detail && <Detail detail={detail} />}
       {history && <History history={history} />}

@@ -34,8 +34,12 @@ const History: React.FC<HistoryProps> = ({ history }) => {
                 {index !== history.length - 1 && <div className="w-px h-full bg-gray-300"></div>}
               </div>
               <div className="pt-1 sm:pt-1 p-6 sm:p-8">
-                <p className="mb-2 text-base font-semibold text-gray-800 sm:text-lg">{item.desc} - {item.location}</p>
-                <p className="sm:text-base text-sm">{item.date}</p>
+                <p className="mb-2 text-base font-semibold text-gray-800 sm:text-lg">
+                  {item.desc} - {item.location}
+                </p>
+                <p className="sm:text-base text-sm">
+                  {item.date}
+                </p>
               </div>
             </div>
           ))}
