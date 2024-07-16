@@ -9,8 +9,8 @@ import Alert from '@/components/common/alert';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
-import getCourier from '@/api/courier';
-import getTrack from '@/api/track';
+import { getCourier } from '@/api/courier';
+import { getTrack } from '@/api/track';
 import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
 import { CourierData } from '@/interfaces/courier';
 
@@ -94,12 +94,27 @@ const Page: React.FC = () => {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-8 mb-6 justify-between sm:space-x-2">
               <div className="inline-block sm:col-span-5">
-                <Input receipt={receipt} handleInputChange={handleInputChange} placeholder={'Masukkan Resi'} />
-                {errors.receipt && <p className="mt-1 text-red-500 text-sm sm:text-base">{errors.receipt}</p>}
+                <Input 
+                  receipt={receipt} 
+                  handleInputChange={handleInputChange} 
+                  placeholder={'Masukkan Resi'} 
+                />
+                {errors.receipt && 
+                  <p className="mt-1 text-red-500 text-sm sm:text-base">
+                    {errors.receipt}
+                  </p>
+                }
               </div>
               <div className="inline-block mt-2 sm:mt-0 sm:col-span-2">
-                <Option option={list} courier={courier} handleInputChange={handleInputChange} />
-                {errors.courier && <p className="mt-1 text-red-500 text-sm sm:text-base">{errors.courier}</p>}
+                <Option 
+                  option={list} 
+                  courier={courier} 
+                  handleInputChange={handleInputChange} 
+                />
+                {errors.courier && 
+                  <p className="mt-1 text-red-500 text-sm sm:text-base">
+                    {errors.courier}
+                  </p>}
               </div>
               <div className="inline-block mt-2 sm:mt-0 sm:col-span-1">
                 <Button onClick={handleChekTracking} title={'Cek'}/>
