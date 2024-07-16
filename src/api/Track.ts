@@ -1,11 +1,11 @@
 import axios from '../config/axios';
 import { TrackData } from '@/interfaces/track';
 
-export const requestGetTrack = async (courier: string, receipt:string): Promise<TrackData> => {
+export const getTrack = async (courier: string, receipt:string): Promise<TrackData> => {
   try {
     const result = await axios.get('/track', {
       params: {
-        api_key: '174f7c4199d633fb2436acbf5e2576bc505aba36a11fa4bf1f6116e77c0c7c70' || process.env.API_KEY,
+        api_key: process.env.NEXT_PUBLIC_API_KEY,
         courier,
         awb: receipt
       }
