@@ -1,4 +1,4 @@
-import axios from '../config/axios';
+import axios from '@/config/axios';
 import { TrackData } from '@/interfaces/track';
 
 export const getTrack = async (courier: string, receipt:string): Promise<TrackData> => {
