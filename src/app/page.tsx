@@ -14,7 +14,7 @@ import { getTrack } from '@/api/track';
 import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
 import { CourierData } from '@/interfaces/courier';
 
-const Page = () => {
+const Page: React.FC = () => {
   const [receipt, setReceipt] = useState<string>('');
   const [courier, setCourier] = useState<string>('');
   const [list, setList] = useState<CourierData[]>([]);
