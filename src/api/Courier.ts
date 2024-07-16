@@ -1,7 +1,7 @@
 import axios from '@/config/axios';
 import { CourierData } from '@/interfaces/courier';
 
-export const getCourier = async (): Promise<CourierData[]> => {
+const getCourier = async (): Promise<CourierData[]> => {
   try {
     const result = await axios.get('/list_courier', {
       params: {
@@ -13,3 +13,5 @@ export const getCourier = async (): Promise<CourierData[]> => {
     throw new Error('Failed to fetch the list of couriers');
   } 
 }
+
+export default getCourier;

@@ -9,8 +9,8 @@ import Alert from '@/components/common/alert';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
-import { getCourier } from '../api/courier';
-import { getTrack } from '../api/track';
+import getCourier from '@/api/courier';
+import getTrack from '@/api/track';
 import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
 import { CourierData } from '@/interfaces/courier';
 

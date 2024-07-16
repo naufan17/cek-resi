@@ -82,3 +82,5 @@ export const getTrack = async (courier: string, receipt:string): Promise<TrackDa
 
   // return data.data;
 }
+
+export default getTrack;
