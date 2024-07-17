@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import '../styles/globals.css'
+import '@/styles/globals.css'
 
 interface RootLayoutProps {
   children: React.ReactNode;
