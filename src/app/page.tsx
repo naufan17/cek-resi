@@ -8,9 +8,8 @@ import Alert from '@/components/common/alert';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
-import axiosInstance from '@/config/axios';
-// import { getCourier } from '@/api/courier';
-// import { getTrack } from '@/api/track';
+import { getCourier } from '@/api/courier';
+import { getTrack } from '@/api/track';
 import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
 import { CourierData } from '@/interfaces/courier';
 
@@ -30,14 +29,8 @@ const Page: React.FC = () => {
 
   const listCourier = async () => {
     try {
-      // const result = await getCourier();
-      // setList(result)    
-      const result = await axiosInstance.get('/list_courier', {
-        params: {
-          api_key: process.env.NEXT_PUBLIC_API_KEY,
-        }
-      })
-      setList(result.data)      
+      const result = await getCourier();
+      setList(result)    
     } catch (err) {
       console.error('Error fetching couriers:', err);
     }
@@ -45,20 +38,10 @@ const Page: React.FC = () => {
 
   const trackReceipt = async () => {
     try {
-      // const result = await getTrack(courier, receipt);
-      // setInformation(result.summary);
-      // setDetail(result.detail);
-      // setHistory(result.history);  
-      const result = await axiosInstance.get('/track', {
-        params: {
-          api_key: process.env.NEXT_PUBLIC_API_KEY,
-          courier,
-          awb: receipt
-        }
-      })
-      setInformation(result.data.data.summary);
-      setDetail(result.data.data.detail);
-      setHistory(result.data.data.history);    
+      const result = await getTrack(courier, receipt);
+      setInformation(result.summary);
+      setDetail(result.detail);
+      setHistory(result.history);  
     } catch (err) {
       setAlert(true)
       console.error('Error fetching track:', err);
