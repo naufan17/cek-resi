@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import trackingReducer from '@/store/slice/trackingSlice';
+import trackingReducer from '@/store/slices/trackingSlice';
 
 export const store = configureStore({
   reducer: {

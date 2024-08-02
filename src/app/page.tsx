@@ -3,16 +3,6 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
-import { 
-  setReceipt, 
-  setCourier, 
-  setList, 
-  setInformation, 
-  setDetail, 
-  setHistory, 
-  setAlert, 
-  setErrors 
-} from '@/store/slice/trackingSlice';
 import Input from '@/components/common/input';
 import Option from '@/components/common/option';
 import Button from '@/components/common/button';
@@ -20,8 +10,13 @@ import Alert from '@/components/common/alert';
 import Information from "@/components/home/information";
 import Detail from "@/components/home/detail";
 import History from "@/components/home/history";
-import { getCourier } from '@/api/courier';
-import { getTrack } from '@/api/track';
+import { fetchCourierList, fetchTrackInformation } from '@/store/thunks/trackingThunk';
+import { 
+  setReceipt, 
+  setCourier, 
+  setAlert, 
+  setErrors 
+} from '@/store/slices/trackingSlice';
 
 const Page: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,29 +32,8 @@ const Page: React.FC = () => {
   } = useSelector((state: RootState) => state.tracking);
 
   useEffect(() => {
-    listCourier();
-  }, [])
-
-  const listCourier = async () => {
-    try {
-      const result = await getCourier();
-      dispatch(setList(result));   
-    } catch (err) {
-      console.error('Error fetching couriers:', err);
-    }
-  };
-
-  const trackReceipt = async () => {
-    try {
-      const result = await getTrack(courier, receipt);
-      dispatch(setInformation(result.summary));
-      dispatch(setDetail(result.detail));
-      dispatch(setHistory(result.history));  
-    } catch (err) {
-      dispatch(setAlert(true))
-      console.error('Error fetching track:', err);
-    }
-  };
+    dispatch(fetchCourierList());
+  }, [dispatch])
 
   const validateFields = () => {
     const newErrors: {[key: string]: string} = {};
@@ -75,7 +49,7 @@ const Page: React.FC = () => {
       return;
     }
     dispatch(setErrors({}));
-    trackReceipt();
+    dispatch(fetchTrackInformation({ courier, receipt }));
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
