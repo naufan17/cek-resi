@@ -1,40 +1,27 @@
 'use client'
 
-import React, { ChangeEvent, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '@/store';
-import { 
-  setReceipt, 
-  setCourier, 
-  setList, 
-  setInformation, 
-  setDetail, 
-  setHistory, 
-  setAlert, 
-  setErrors 
-} from '@/store/slice/trackingSlice';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import Input from '@/components/common/input';
 import Option from '@/components/common/option';
 import Button from '@/components/common/button';
 import Alert from '@/components/common/alert';
-import Information from "@/components/home/information";
-import Detail from "@/components/home/detail";
-import History from "@/components/home/history";
+import Information from "@/app/information";
+import Detail from "@/app/detail";
+import History from "@/app/history";
 import { getCourier } from '@/api/courier';
 import { getTrack } from '@/api/track';
+import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
+import { CourierData } from '@/interfaces/courier';
 
 const Page: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { 
-    receipt, 
-    courier, 
-    list, 
-    information, 
-    detail, 
-    history, 
-    alert, 
-    errors 
-  } = useSelector((state: RootState) => state.tracking);
+  const [receipt, setReceipt] = useState<string>('');
+  const [courier, setCourier] = useState<string>('');
+  const [list, setList] = useState<CourierData[]>([]);
+  const [information, setInformation] = useState<SummaryData | null>(null);
+  const [detail, setDetail] = useState<DetailData | null>(null);
+  const [history, setHistory] = useState<HistoryData[] | null>(null);
+  const [alert, setAlert] = useState<boolean>(false);
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
 
   useEffect(() => {
     listCourier();
@@ -43,7 +30,7 @@ const Page: React.FC = () => {
   const listCourier = async () => {
     try {
       const result = await getCourier();
-      dispatch(setList(result));   
+      setList(result)    
     } catch (err) {
       console.error('Error fetching couriers:', err);
     }
@@ -52,11 +39,11 @@ const Page: React.FC = () => {
   const trackReceipt = async () => {
     try {
       const result = await getTrack(courier, receipt);
-      dispatch(setInformation(result.summary));
-      dispatch(setDetail(result.detail));
-      dispatch(setHistory(result.history));  
+      setInformation(result.summary);
+      setDetail(result.detail);
+      setHistory(result.history);  
     } catch (err) {
-      dispatch(setAlert(true))
+      setAlert(true)
       console.error('Error fetching track:', err);
     }
   };
@@ -71,10 +58,10 @@ const Page: React.FC = () => {
   const handleChekTracking = () => {
     const validateErrors = validateFields();
     if (Object.keys(validateErrors).length > 0) {
-      dispatch(setErrors(validateErrors));
+      setErrors(validateErrors);
       return;
     }
-    dispatch(setErrors({}));
+    setErrors({});
     trackReceipt();
   }
 
@@ -83,10 +70,10 @@ const Page: React.FC = () => {
 
     switch (name) {
       case 'courier':
-        dispatch(setCourier(value));
+        setCourier(value);
         break;
       case 'receipt':
-        dispatch(setReceipt(value));
+        setReceipt(value);
         break;
       default:
         break;
