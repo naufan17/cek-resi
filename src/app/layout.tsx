@@ -1,8 +1,10 @@
-import { Metadata } from 'next'
-import '@/styles/globals.css'
+import { ReactNode } from 'react';
+import { Metadata } from 'next';
+import ReduxProvider from './providers';
+import '@/styles/globals.css';
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const metadata: Metadata = {
@@ -11,13 +13,15 @@ export const metadata: Metadata = {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
-    <html lang="en">
-      <body>
-        <main>
-          {children}
-        </main>
-      </body>
-    </html>
+    <ReduxProvider>
+      <html lang="en">
+        <body>
+          <main>
+            {children}
+          </main>
+        </body>
+      </html>
+    </ReduxProvider>
   )
 }
 
