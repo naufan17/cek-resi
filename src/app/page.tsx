@@ -2,7 +2,6 @@
 
 import React, { ChangeEvent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '@/lib/store'
 import Input from '@/components/ui/input';
 import Option from '@/components/ui/option';
 import Button from '@/components/ui/button';
@@ -10,13 +9,14 @@ import Alert from '@/components/ui/alert';
 import Information from "@/app/information";
 import Detail from "@/app/detail";
 import History from "@/app/history";
-import { fetchCourierList, fetchTrackInformation } from '@/lib/thunks/trackingThunk';
+import { RootState, AppDispatch } from '@/store/store'
+import { fetchCourierList, fetchTrackInformation } from '@/store/feature/tracking/trackingThunk';
 import { 
   setReceipt, 
   setCourier, 
   setAlert, 
   setErrors 
-} from '@/lib/slices/trackingSlice';
+} from '@/store/feature/tracking/trackingSlice';
 
 const Page: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

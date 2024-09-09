@@ -7,14 +7,14 @@ import {
   setDetail, 
   setHistory, 
   setAlert, 
-} from '@/lib/slices/trackingSlice';
+} from '@/store/feature/tracking/trackingSlice';
 
 export const fetchCourierList = createAsyncThunk('/tracking/fetchCourier', async (_, { dispatch }) => {
   try {
     const result = await getCourier();
     dispatch(setList(result));   
   } catch (err) {
-    console.error('Error fetching couriers:', err);
+    console.error(err);
   }
 });
 
@@ -26,6 +26,6 @@ export const fetchTrackInformation = createAsyncThunk('/tracking/fetchTrack', as
     dispatch(setHistory(result.history));  
   } catch (err) {
     dispatch(setAlert(true))
-    console.error('Error fetching track:', err);
+    console.error(err);
   }
 });
