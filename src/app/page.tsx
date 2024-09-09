@@ -120,7 +120,7 @@ const Page: React.FC = () => {
               <Alert 
                 status={false} 
                 message={"Resi tidak ditemukan"} 
-                onClose={() => setAlert(false)}
+                onClose={() => dispatch(setAlert(false))}
               />
             }
           </div>

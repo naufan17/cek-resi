@@ -6,6 +6,7 @@ import {
   setInformation, 
   setDetail, 
   setHistory, 
+  setAlert, 
 } from '@/lib/slices/trackingSlice';
 
 export const fetchCourierList = createAsyncThunk('/tracking/fetchCourier', async (_, { dispatch }) => {
@@ -24,6 +25,7 @@ export const fetchTrackInformation = createAsyncThunk('/tracking/fetchTrack', as
     dispatch(setDetail(result.detail));
     dispatch(setHistory(result.history));  
   } catch (err) {
+    dispatch(setAlert(true))
     console.error('Error fetching track:', err);
   }
 });
