@@ -1,7 +1,7 @@
 import React from "react"
-import { SummaryData } from "@/interfaces/track";
-import Subtitle from "@/components/common/subtitle";
-import Content from "@/components/common/content";
+import { SummaryData } from "@/types/track";
+import Subtitle from "@/components/ui/subtitle";
+import Content from "@/components/ui/content";
 
 interface InformationProps {
   information: SummaryData

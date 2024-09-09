@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { CourierData } from '@/interfaces/courier';
+import { CourierData } from '@/types/courier';
 
 interface OptionProps {
   courier: string;

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const axiosInstance = Axios.create({
-	baseURL: 'https://api.binderbyte.com/v1'
+	baseURL: process.env.NEXT_PUBLIC_BASE_URL
 });
 
 export default axiosInstance;

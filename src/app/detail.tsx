@@ -1,7 +1,7 @@
 import React from "react"
-import { DetailData } from "@/interfaces/track";
-import Subtitle from "@/components/common/subtitle"
-import Content from "@/components/common/content";
+import { DetailData } from "@/types/track";
+import Subtitle from "@/components/ui/subtitle"
+import Content from "@/components/ui/content";
 
 interface DetailProps {
   detail: DetailData

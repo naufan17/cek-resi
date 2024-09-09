@@ -1,17 +1,17 @@
 'use client'
 
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import Input from '@/components/common/input';
-import Option from '@/components/common/option';
-import Button from '@/components/common/button';
-import Alert from '@/components/common/alert';
+import Input from '@/components/ui/input';
+import Option from '@/components/ui/option';
+import Button from '@/components/ui/button';
+import Alert from '@/components/ui/alert';
 import Information from "@/app/information";
 import Detail from "@/app/detail";
 import History from "@/app/history";
 import { getCourier } from '@/api/courier';
 import { getTrack } from '@/api/track';
-import { SummaryData, DetailData, HistoryData } from '@/interfaces/track';
-import { CourierData } from '@/interfaces/courier';
+import { SummaryData, DetailData, HistoryData } from '@/types/track';
+import { CourierData } from '@/types/courier';
 
 const Page: React.FC = () => {
   const [receipt, setReceipt] = useState<string>('');
@@ -43,8 +43,9 @@ const Page: React.FC = () => {
       setDetail(result.detail);
       setHistory(result.history);  
     } catch (err) {
-      setAlert(true)
       console.error('Error fetching track:', err);
+    } finally {
+      setAlert(true)
     }
   };
 

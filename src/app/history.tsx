@@ -1,6 +1,6 @@
 import React from 'react';
-import { HistoryData } from '@/interfaces/track';
-import Subtitle from "@/components/common/subtitle";
+import { HistoryData } from '@/types/track';
+import Subtitle from "@/components/ui/subtitle";
 
 interface HistoryProps {
   history: HistoryData[];

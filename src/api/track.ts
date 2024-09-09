@@ -1,5 +1,5 @@
-import axiosInstance from '@/config/axios';
-import { TrackData } from '@/interfaces/track';
+import axiosInstance from '@/config/api';
+import { TrackData } from '@/types/track';
 
 export const getTrack = async (courier: string, receipt:string): Promise<TrackData> => {
   try {

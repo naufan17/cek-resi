@@ -1,5 +1,5 @@
-import axiosInstance from '@/config/axios';
-import { CourierData } from '@/interfaces/courier';
+import axiosInstance from '@/config/api';
+import { CourierData } from '@/types/courier';
 
 export const getCourier = async (): Promise<CourierData[]> => {
   try {
