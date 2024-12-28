@@ -15,7 +15,7 @@ const Input: React.FC<InputProps> = ({ receipt, handleInputChange, placeholder }
       onChange={handleInputChange}
       placeholder={placeholder}
       required
-      className="flex-grow sm:h-12 h-10 px-4 w-full sm:text-base text-md text-white bg-transparent border-2 border-slate-800 rounded appearance-none focus:border-slate-600 focus:outline-none focus:shadow-outline"
+      className="flex-grow sm:h-12 h-10 px-4 w-full sm:text-base text-md text-slate-950 bg-slate-100 border-2 border-slate-600 rounded-xl appearance-none focus:border-slate-400 focus:outline-none focus:shadow-outline"
     />
   )
 }
