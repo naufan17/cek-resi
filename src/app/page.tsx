@@ -100,7 +100,7 @@ const Page: React.FC = () => {
                   </p>
                 }
               </div>
-              <div className="inline-block mt-2 sm:mt-0 sm:col-span-2">
+              <div className="inline-block mt-4 sm:mt-0 sm:col-span-2">
                 <Option 
                   option={list} 
                   courier={courier} 
@@ -112,7 +112,7 @@ const Page: React.FC = () => {
                   </p>
                 }
               </div>
-              <div className="inline-block mt-2 sm:mt-0 sm:col-span-1">
+              <div className="inline-block mt-4 sm:mt-0 sm:col-span-1">
                 <Button onClick={handleChekTracking} title={'Cek'}/>
               </div>
             </div>
