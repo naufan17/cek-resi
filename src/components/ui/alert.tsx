@@ -12,7 +12,7 @@ const alertStyle = status
   : "bg-red-100 border-red-800 text-red-800"
 
   return (
-    <div className={`relative border-2 px-4 py-3 rounded-lg mb-4 ${alertStyle}`} role="alert">
+    <div className={`relative border-2 px-4 py-3 rounded-xl mb-4 ${alertStyle}`} role="alert">
       <span className={`block sm:inline text-sm md:text-base font-medium ${status ? 'text-green-800' : 'text-red-800'}`}>
         {message}
       </span>
